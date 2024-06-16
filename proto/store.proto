@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package distributedstore;
+
+service KeyValueStore {
+  rpc put(PutRequest) returns (PutResponse);
+  rpc get(GetRequest) returns (GetResponse);
+  rpc slowDown(SlowdownRequest) returns (SlowDownResponse);
+  rpc restore(RestoreRequest) returns (RestoreResponse);
+
+  // New functions added
+  rpc commit(CommitReq) returns (CommitResp);
+  rpc finalCommit(FinalCommitReq) returns (FinalCommitResp);
+  rpc discoverMsg(DiscoverMsgReq) returns (DiscoverMsgResp);
+  rpc votePut(VotePutReq) returns (VotePutResp);
+  rpc voteGet(VoteGetReq) returns (VoteGetResp);
+}
+
+message VoteGetReq {
+  string key = 1;
+}
+
+message VoteGetResp {
+  bool success = 1;
+  string value = 2;
+  int32 vote_size = 3;
+}
+
+message VotePutResp {
+  bool success = 1;
+  int32 vote_size = 2;
+}
+
+message VotePutReq {
+  string key = 1;
+  string value = 2;
+}
+
+message DiscoverMsgReq {
+  string ip = 1;
+  int32 port = 2;
+}
+
+message DiscoverMsgResp {
+  string data = 1;
+}
+
+message FinalCommitResp {
+  bool success = 1;
+}
+
+message FinalCommitReq {
+  string key = 1;
+  string value = 2;
+}
+
+message CommitReq {
+  string key = 1;
+  string value = 2;
+}
+
+message CommitResp {
+  bool success = 1;
+}
+
+message PutRequest {
+  string key = 1;
+  string value = 2;
+}
+
+message PutResponse {
+  bool success = 1;
+}
+
+message GetRequest {
+  string key = 1;
+}
+
+message GetResponse {
+  string value = 1;
+  bool found = 2;
+}
+
+message SlowdownRequest {
+  int32 seconds = 1;
+}
+
+message SlowDownResponse {
+  bool success = 1;
+}
+
+message RestoreRequest {}
+
+message RestoreResponse {
+  bool success = 1;
+}
+
+message Empty {}
