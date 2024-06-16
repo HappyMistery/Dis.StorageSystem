@@ -66,7 +66,7 @@ Each component of the project is organized into its respective directory, facili
 > **Note:** Students are required to define the necessary stubs for implementing the Two Phase Commit (2PC) protocol and for node registration in the system. These stubs must be manually added to the store.proto file by the students as part of their implementation.
 
 
-##STEPS TO RUN IT
+## STEPS TO RUN IT
 Note that this code runs on python 3.11 and in Windows...
 1. Install various modules for python:
    1.1. pip install grpcio grpcio-tools
